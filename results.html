@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Results — Faculty of Science Student Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <script src="js/auth.js"></script>
+    <script>
+      if (!PortalAuth.requireAuth("index.html")) {
+        document.write("");
+      }
+    </script>
+    <script src="js/data.js"></script>
+
+    <header class="app-header" role="banner">
+      <div class="container app-header__inner">
+        <div>
+          <h1 class="app-header__title">
+            Science Student Portal
+            <span>University of Kelaniya — Results &amp; Examinations</span>
+          </h1>
+        </div>
+        <div class="app-header__student">
+          <div>
+            <strong id="hdr-name"></strong>
+            <span id="hdr-id"></span>
+          </div>
+          <a class="btn btn--secondary" href="dashboard.html">Dashboard</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-main container" id="main-content">
+      <div class="page-title-bar">
+        <div>
+          <h1 id="page-title">Year Results</h1>
+          <p class="subtitle" style="margin: 0; color: var(--color-text-muted); font-size: 0.9375rem">
+            Official course outcomes for the selected academic level.
+          </p>
+        </div>
+        <div class="btn-group screen-only">
+          <button type="button" class="btn btn--secondary" id="btn-pdf">Download PDF</button>
+          <button type="button" class="btn btn--secondary" id="btn-print">Print</button>
+          <a class="btn btn--primary" href="dashboard.html">Back to dashboard</a>
+        </div>
+      </div>
+
+      <section class="results-summary" aria-label="Results summary">
+        <article class="card">
+          <h2 class="card__title">GPA (this level)</h2>
+          <p class="card__value" id="rs-gpa"></p>
+        </article>
+        <article class="card">
+          <h2 class="card__title">Total credits</h2>
+          <p class="card__value" id="rs-credits"></p>
+        </article>
+        <article class="card">
+          <h2 class="card__title">Non-GPA credits</h2>
+          <p class="card__value" id="rs-nongpa"></p>
+        </article>
+      </section>
+
+      <section class="card" aria-labelledby="table-heading">
+        <h2 id="table-heading" class="visually-hidden" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0)">
+          Course results table
+        </h2>
+        <div class="filters-bar">
+          <div class="form-group form-group--search">
+            <label for="filter-search">Search courses</label>
+            <input
+              type="search"
+              id="filter-search"
+              placeholder="Code or course name…"
+              autocomplete="off"
+              aria-describedby="filter-hint"
+            />
+          </div>
+          <div class="form-group">
+            <label for="filter-year">Academic year</label>
+            <select id="filter-year" aria-label="Filter by academic year">
+              <option value="">All years</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="filter-attempt">Attempt</label>
+            <select id="filter-attempt" aria-label="Filter by attempt">
+              <option value="">All attempts</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="filter-status">Exam status</label>
+            <select id="filter-status" aria-label="Filter by exam status">
+              <option value="">All statuses</option>
+            </select>
+          </div>
+        </div>
+        <p id="filter-hint" class="subtitle" style="margin: 0 0 1rem; font-size: 0.8125rem">
+          <span id="row-count" aria-live="polite"></span>
+        </p>
+
+        <div class="table-wrap" role="region" aria-label="Scrollable results" tabindex="0">
+          <table class="results-table" id="results-table">
+            <thead>
+              <tr>
+                <th scope="col">Course code</th>
+                <th scope="col">Course name</th>
+                <th scope="col">Academic year</th>
+                <th scope="col">Attempt</th>
+                <th scope="col">Exam status</th>
+                <th scope="col">Exam note</th>
+                <th scope="col">Grade</th>
+              </tr>
+            </thead>
+            <tbody id="results-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="js/results.js"></script>
+  </body>
+</html>

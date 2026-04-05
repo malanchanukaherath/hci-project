@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard — Faculty of Science Student Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <script src="js/auth.js"></script>
+    <script>
+      if (!PortalAuth.requireAuth("index.html")) {
+        document.write("");
+      }
+    </script>
+    <script src="js/data.js"></script>
+
+    <header class="app-header" role="banner">
+      <div class="container app-header__inner">
+        <div>
+          <h1 class="app-header__title">
+            Science Student Portal
+            <span>University of Kelaniya — Results &amp; Examinations</span>
+          </h1>
+        </div>
+        <div class="app-header__student">
+          <div>
+            <strong id="hdr-name"></strong>
+            <span id="hdr-id"></span>
+          </div>
+          <a class="btn btn--secondary" href="index.html" id="sign-out">Sign out</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-main container" id="main-content">
+      <section class="summary-grid" aria-label="Academic summary">
+        <article class="card">
+          <h2 class="card__title">Current GPA</h2>
+          <p class="card__value" id="sum-gpa"></p>
+          <p class="card__meta">Cumulative grade point average</p>
+        </article>
+        <article class="card">
+          <h2 class="card__title">Total credits</h2>
+          <p class="card__value" id="sum-credits"></p>
+          <p class="card__meta">Earned toward degree</p>
+        </article>
+        <article class="card">
+          <h2 class="card__title">Academic year</h2>
+          <p class="card__value" id="sum-year" style="font-size: 1.25rem"></p>
+          <p class="card__meta">Current registration period</p>
+        </article>
+        <article class="card">
+          <h2 class="card__title">Exam status</h2>
+          <p class="card__value" id="sum-exam" style="font-size: 1rem; line-height: 1.35"></p>
+          <p class="card__meta">Eligibility summary</p>
+        </article>
+      </section>
+
+      <section class="actions-section" aria-labelledby="quick-actions-heading">
+        <h2 id="quick-actions-heading">Quick actions</h2>
+        <div class="actions-grid">
+          <a class="action-tile" href="results.html?year=1">
+            Year 1 Results
+            <small>View courses &amp; grades</small>
+          </a>
+          <a class="action-tile" href="results.html?year=2">
+            Year 2 Results
+            <small>View courses &amp; grades</small>
+          </a>
+          <a class="action-tile" href="results.html?year=3">
+            Year 3 Results
+            <small>View courses &amp; grades</small>
+          </a>
+          <a class="action-tile" href="results.html?year=4">
+            Year 4 Results
+            <small>View courses &amp; grades</small>
+          </a>
+          <a class="action-tile" href="#">
+            Repeat Registration
+            <small>Apply for repeat exams</small>
+          </a>
+          <a class="action-tile" href="admission.html">
+            Exam Admission
+            <small>Card &amp; centre details</small>
+          </a>
+        </div>
+      </section>
+
+      <div class="dashboard-two-col">
+        <section class="card" aria-labelledby="details-heading">
+          <h2 id="details-heading">Student details</h2>
+          <dl class="detail-list">
+            <li>
+              <dt>Full name</dt>
+              <dd id="det-name"></dd>
+            </li>
+            <li>
+              <dt>Student ID</dt>
+              <dd id="det-id"></dd>
+            </li>
+            <li>
+              <dt>Programme</dt>
+              <dd id="det-programme"></dd>
+            </li>
+            <li>
+              <dt>Registration year</dt>
+              <dd id="det-reg"></dd>
+            </li>
+          </dl>
+        </section>
+        <aside class="card" style="background: var(--color-bg-muted); border-style: dashed">
+          <h3 style="margin-top: 0">Need help?</h3>
+          <p style="font-size: 0.9375rem; margin-bottom: 0">
+            Contact the Faculty Examination Branch for transcript requests, corrections, or eligibility questions.
+            This prototype demonstrates layout and task flow only.
+          </p>
+        </aside>
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        var s = window.PORTAL_DATA && window.PORTAL_DATA.student;
+        if (!s) return;
+        document.getElementById("hdr-name").textContent = s.name;
+        document.getElementById("hdr-id").textContent = "ID: " + s.id;
+        document.getElementById("sum-gpa").textContent = s.currentGpa;
+        document.getElementById("sum-credits").textContent = String(s.totalCredits);
+        document.getElementById("sum-year").textContent = s.academicYear;
+        document.getElementById("sum-exam").textContent = s.examStatus;
+        document.getElementById("det-name").textContent = s.name;
+        document.getElementById("det-id").textContent = s.id;
+        document.getElementById("det-programme").textContent = s.programme;
+        document.getElementById("det-reg").textContent = s.registrationYear;
+        document.getElementById("sign-out").addEventListener("click", function (e) {
+          e.preventDefault();
+          PortalAuth.logout();
+          window.location.href = "index.html";
+        });
+      })();
+    </script>
+  </body>
+</html>

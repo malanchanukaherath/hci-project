@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Exam Admission Card — Faculty of Science Student Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <script src="js/auth.js"></script>
+    <script>
+      if (!PortalAuth.requireAuth("index.html")) {
+        document.write("");
+      }
+    </script>
+    <script src="js/data.js"></script>
+
+    <header class="app-header screen-only" role="banner">
+      <div class="container app-header__inner">
+        <div>
+          <h1 class="app-header__title">
+            Science Student Portal
+            <span>University of Kelaniya — Results &amp; Examinations</span>
+          </h1>
+        </div>
+        <div class="app-header__student">
+          <div>
+            <strong id="hdr-name"></strong>
+            <span id="hdr-id"></span>
+          </div>
+          <a class="btn btn--secondary" href="dashboard.html">Dashboard</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="page-main container admission-layout" id="main-content">
+      <div class="page-title-bar screen-only">
+        <div>
+          <h1>Exam Admission Card</h1>
+          <p class="subtitle" style="margin: 0; color: var(--color-text-muted); font-size: 0.9375rem">
+            View, print, or save your admission details for the examination period.
+          </p>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn--primary" id="btn-download">Download PDF</button>
+          <button type="button" class="btn btn--secondary" id="btn-print">Print admission card</button>
+          <a class="btn btn--ghost" href="dashboard.html">Back to dashboard</a>
+        </div>
+      </div>
+
+      <section class="card admission-screen-card screen-only" aria-labelledby="screen-details">
+        <h2 id="screen-details">Student &amp; centre (summary)</h2>
+        <dl class="detail-list">
+          <li>
+            <dt>Student name</dt>
+            <dd id="sc-name"></dd>
+          </li>
+          <li>
+            <dt>Student ID</dt>
+            <dd id="sc-id"></dd>
+          </li>
+          <li>
+            <dt>Programme</dt>
+            <dd id="sc-prog"></dd>
+          </li>
+          <li>
+            <dt>Examination period</dt>
+            <dd id="sc-period"></dd>
+          </li>
+          <li>
+            <dt>Examination centre</dt>
+            <dd id="sc-centre"></dd>
+          </li>
+          <li>
+            <dt>Centre address</dt>
+            <dd id="sc-address"></dd>
+          </li>
+          <li>
+            <dt>Valid period</dt>
+            <dd id="sc-valid"></dd>
+          </li>
+        </dl>
+      </section>
+
+      <h2 class="screen-only" style="font-size: 1.125rem; margin: 2rem 0 0.75rem">Official card preview</h2>
+      <p class="screen-only subtitle" style="margin: 0 0 1rem; font-size: 0.875rem; color: var(--color-text-muted)">
+        This layout is optimised for printing and saving as PDF (use your browser’s print dialog → Save as PDF).
+      </p>
+
+      <!-- Printable official card (visible on screen and in print) -->
+      <article class="print-admission" aria-label="Printable exam admission card">
+        <header class="print-admission__header">
+          <p class="uni">University of Kelaniya — Sri Lanka</p>
+          <p class="faculty">Faculty of Science</p>
+          <div class="login-brand__crest" style="margin: 0.5rem auto; width: 56px; height: 56px; font-size: 1.35rem">
+            UK
+          </div>
+          <h1 class="doc-title">Examination Admission Card</h1>
+        </header>
+        <dl class="print-admission__body">
+          <div class="print-admission__row">
+            <dt>Student name</dt>
+            <dd id="pr-name"></dd>
+          </div>
+          <div class="print-admission__row">
+            <dt>Student ID</dt>
+            <dd id="pr-id"></dd>
+          </div>
+          <div class="print-admission__row">
+            <dt>Programme</dt>
+            <dd id="pr-prog"></dd>
+          </div>
+          <div class="print-admission__row">
+            <dt>Examination period</dt>
+            <dd id="pr-period"></dd>
+          </div>
+          <div class="print-admission__row">
+            <dt>Examination centre</dt>
+            <dd id="pr-centre"></dd>
+          </div>
+          <div class="print-admission__row">
+            <dt>Address</dt>
+            <dd id="pr-address"></dd>
+          </div>
+          <div class="print-admission__row">
+            <dt>Valid from — to</dt>
+            <dd id="pr-valid"></dd>
+          </div>
+          <div class="print-admission__row">
+            <dt>Instructions</dt>
+            <dd id="pr-instructions"></dd>
+          </div>
+        </dl>
+        <footer class="print-admission__footer">
+          <p>
+            This document is a prototype for interface design. Official admission cards are issued only by the
+            Faculty Examination Branch.
+          </p>
+        </footer>
+      </article>
+    </main>
+
+    <script>
+      (function () {
+        var s = window.PORTAL_DATA && window.PORTAL_DATA.student;
+        var a = window.PORTAL_DATA && window.PORTAL_DATA.admission;
+        if (!s || !a) return;
+
+        document.getElementById("hdr-name").textContent = s.name;
+        document.getElementById("hdr-id").textContent = "ID: " + s.id;
+
+        document.getElementById("sc-name").textContent = s.name;
+        document.getElementById("sc-id").textContent = s.id;
+        document.getElementById("sc-prog").textContent = s.programme;
+        document.getElementById("sc-period").textContent = a.examPeriod;
+        document.getElementById("sc-centre").textContent = a.centreName;
+        document.getElementById("sc-address").textContent = a.centreAddress;
+        document.getElementById("sc-valid").textContent = a.validFrom + " — " + a.validTo;
+
+        document.getElementById("pr-name").textContent = s.name;
+        document.getElementById("pr-id").textContent = s.id;
+        document.getElementById("pr-prog").textContent = s.programme;
+        document.getElementById("pr-period").textContent = a.examPeriod;
+        document.getElementById("pr-centre").textContent = a.centreName;
+        document.getElementById("pr-address").textContent = a.centreAddress;
+        document.getElementById("pr-valid").textContent = a.validFrom + " — " + a.validTo;
+        document.getElementById("pr-instructions").textContent = a.instructions;
+
+        function doPrint() {
+          window.print();
+        }
+        document.getElementById("btn-print").addEventListener("click", doPrint);
+        document.getElementById("btn-download").addEventListener("click", doPrint);
+      })();
+    </script>
+  </body>
+</html>
