@@ -453,6 +453,12 @@ html[data-theme="dark"] .theme-toggle__icon--moon {
   margin: 0 0 0.35rem;
 }
 
+html[data-theme="light"] .card__title {
+  color: #0a0a0a;
+  font-weight: 700;
+  opacity: 0.92;
+}
+
 .card__value {
   font-size: 1.5rem;
   font-weight: 700;
@@ -470,6 +476,11 @@ html[data-theme="light"] .card__value {
   margin: 0.25rem 0 0;
 }
 
+html[data-theme="light"] .card__meta {
+  color: #1a1a1a;
+  opacity: 0.88;
+}
+
 /* Forms */
 .form-group {
   margin-bottom: 1.25rem;
@@ -481,6 +492,11 @@ html[data-theme="light"] .card__value {
   font-weight: 600;
   color: var(--color-text);
   margin-bottom: 0.35rem;
+}
+
+html[data-theme="light"] .form-group label {
+  color: #0a0a0a;
+  font-weight: 700;
 }
 
 .form-group input[type="text"],
@@ -727,14 +743,18 @@ html[data-theme="light"] .login-card .subtitle {
   font-size: 1rem;
   font-weight: 700;
   margin: 0;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 .app-header__title span {
   display: block;
   font-size: 0.75rem;
   font-weight: 500;
-  opacity: 0.9;
+  opacity: 0.98;
   margin-top: 0.15rem;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
 }
 
 .app-header__student {
@@ -748,10 +768,14 @@ html[data-theme="light"] .login-card .subtitle {
 .app-header__student strong {
   display: block;
   font-size: 1rem;
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 .app-header__student span {
-  opacity: 0.92;
+  opacity: 0.98;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .app-header .btn--secondary {
@@ -870,10 +894,22 @@ html[data-theme="light"] .action-tile small {
   color: var(--color-text-muted);
 }
 
+html[data-theme="light"] .detail-list dt {
+  color: #0a0a0a;
+  font-weight: 700;
+  opacity: 0.95;
+}
+
 .detail-list dd {
   margin: 0;
   color: var(--color-text);
   font-weight: 500;
+}
+
+html[data-theme="light"] .detail-list dd {
+  color: #1a1a1a;
+  font-weight: 500;
+  opacity: 0.9;
 }
 
 /* Page title bar */
@@ -888,6 +924,10 @@ html[data-theme="light"] .action-tile small {
 
 .page-title-bar h1 {
   margin: 0;
+}
+
+html[data-theme="light"] .page-title-bar h1 {
+  color: #000000;
 }
 
 /* Results summary strip */
@@ -965,12 +1005,25 @@ html[data-theme="light"] .action-tile small {
   color: var(--color-text);
 }
 
+html[data-theme="light"] .results-table td {
+  color: #0a0a0a;
+  font-weight: 500;
+}
+
 .results-table tbody tr:nth-child(even) {
   background: var(--table-row-alt);
 }
 
+html[data-theme="light"] .results-table tbody tr:nth-child(even) {
+  background: #f0f5fa;
+}
+
 .results-table tbody tr:hover {
   background: var(--table-row-hover);
+}
+
+html[data-theme="light"] .results-table tbody tr:hover {
+  background: #d8eaf9;
 }
 
 .results-table .grade {
@@ -1104,6 +1157,12 @@ html[data-theme="light"] .empty-row td {
 
   .page-main {
     padding: 0;
+  }
+
+  .print-admission__header .doc-title,
+  .print-admission__row dt,
+  .print-admission__row dd {
+    color: #000000 !important;
   }
 
   .print-admission {
