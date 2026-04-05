@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sign in — Faculty of Science Student Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/main.css" />
+    <script src="js/theme.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#login-form">Skip to sign in</a>
+    <div class="theme-toggle-wrap">
+      <button type="button" class="theme-toggle" data-theme-toggle>
+        <svg class="theme-toggle__icon theme-toggle__icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="theme-toggle__icon theme-toggle__icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.31 11.31l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+    </div>
+    <div class="login-page">
+      <p class="login-back-link">
+        <a class="btn btn--ghost" href="index.html" style="color: rgba(255, 255, 255, 0.95); border-color: rgba(255, 255, 255, 0.5)">← Faculty Information System home</a>
+      </p>
+      <header class="login-brand" role="banner">
+        <div class="login-brand__crest">
+          <img src="logos/Kelaniya.png" alt="University of Kelaniya logo" />
+        </div>
+        <p class="login-brand__uni">University of Kelaniya</p>
+        <h1 class="login-brand__faculty">Faculty of Science</h1>
+        <p class="login-brand__portal">Student Results &amp; Examination Portal</p>
+      </header>
+
+      <main class="login-card card card--elevated" id="main-content">
+        <h1>Sign in</h1>
+        <p class="subtitle">Use your faculty credentials to access your academic record.</p>
+
+        <form id="login-form" action="dashboard.html" method="get" novalidate>
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              autocomplete="username"
+              required
+              aria-required="true"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              autocomplete="current-password"
+              required
+              aria-required="true"
+            />
+          </div>
+          <button type="submit" class="btn btn--primary btn--block">Sign in</button>
+        </form>
+
+        <nav class="form-footer-links" aria-label="Account help">
+          <a href="#">Change password</a>
+          <a href="#">Online registration</a>
+        </nav>
+      </main>
+
+      <footer class="login-footer">
+        <p>Faculty of Science, University of Kelaniya, Sri Lanka.</p>
+      </footer>
+    </div>
+    <script src="js/auth.js"></script>
+    <script>
+      (function () {
+        if (window.PortalAuth && window.PortalAuth.isLoggedIn()) {
+          window.location.replace("dashboard.html");
+        }
+        var form = document.getElementById("login-form");
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var u = document.getElementById("username").value.trim();
+          var p = document.getElementById("password").value;
+          if (!u || !p) return;
+          PortalAuth.login();
+          window.location.href = "dashboard.html";
+        });
+      })();
+    </script>
+  </body>
+</html>

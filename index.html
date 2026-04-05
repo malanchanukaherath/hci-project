@@ -3,89 +3,108 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Sign in — Faculty of Science Student Portal</title>
+    <title>Faculty Information System — Faculty of Science, University of Kelaniya</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="css/main.css" />
     <script src="js/theme.js"></script>
   </head>
-  <body>
-    <a class="skip-link" href="#login-form">Skip to sign in</a>
-    <div class="theme-toggle-wrap">
-      <button type="button" class="theme-toggle" data-theme-toggle>
+  <body class="fis-landing-body">
+    <a class="skip-link" href="#fis-main">Skip to main content</a>
+    <div class="theme-toggle-wrap fis-landing__theme">
+      <button type="button" class="theme-toggle fis-landing__theme-btn" data-theme-toggle>
         <svg class="theme-toggle__icon theme-toggle__icon--moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
         <svg class="theme-toggle__icon theme-toggle__icon--sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.31 11.31l1.41 1.41M2 12h2m16 0h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
       </button>
     </div>
-    <div class="login-page">
-      <header class="login-brand" role="banner">
-        <div class="login-brand__crest">
-          <img src="logos/Kelaniya.png" alt="University of Kelaniya logo" />
-        </div>
-        <p class="login-brand__uni">University of Kelaniya</p>
-        <h1 class="login-brand__faculty">Faculty of Science</h1>
-        <p class="login-brand__portal">Student Results &amp; Examination Portal</p>
+
+    <div class="fis-landing" id="fis-main">
+      <header class="fis-landing__masthead">
+        <p class="fis-landing__uni">University of Kelaniya</p>
+        <nav class="fis-landing__utility" aria-label="Quick links">
+          <a href="index.html">Home</a>
+          <span class="fis-landing__utility-sep" aria-hidden="true"> — </span>
+          <a href="#help">Help</a>
+        </nav>
       </header>
 
-      <main class="login-card card card--elevated" id="main-content">
-        <h1>Sign in</h1>
-        <p class="subtitle">Use your faculty credentials to access your academic record.</p>
+      <div class="fis-landing__title-bar">
+        <p class="fis-landing__system-title">Faculty Information System — Faculty of Science</p>
+      </div>
 
-        <form id="login-form" action="dashboard.html" method="get" novalidate>
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input
-              id="username"
-              name="username"
-              type="text"
-              autocomplete="username"
-              required
-              aria-required="true"
-            />
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              id="password"
-              name="password"
-              type="password"
-              autocomplete="current-password"
-              required
-              aria-required="true"
-            />
-          </div>
-          <button type="submit" class="btn btn--primary btn--block">Sign in</button>
-        </form>
+      <section class="fis-landing__hero" aria-label="Welcome">
+        <div class="fis-landing__hero-media">
+          <img
+            src="bg%20photos/fos_image.jpg"
+            alt="Campus view, Faculty of Science"
+            width="1200"
+            height="480"
+            decoding="async"
+          />
+        </div>
+        <div class="fis-landing__hero-overlay">
+          <p class="fis-landing__welcome">
+            <em>welcome</em><br />
+            <em>to the Faculty Information System</em><br />
+            <em>of the Faculty of Science of the University of Kelaniya</em>
+          </p>
+          <p class="fis-landing__welcome-note">
+            <em
+              >All the Academic Staff members and registered students of the Faculty of Science are authorized to use
+              this facility.</em
+            >
+          </p>
+        </div>
+      </section>
 
-        <nav class="form-footer-links" aria-label="Account help">
-          <a href="#">Change password</a>
-          <a href="#">Online registration</a>
-        </nav>
-      </main>
+      <p class="fis-landing__visits">
+        <em>Number of Visits</em>
+        <span class="fis-landing__visits-count" id="fis-visit-count" aria-live="polite">0</span>
+      </p>
 
-      <footer class="login-footer">
-        <p>Faculty of Science, University of Kelaniya, Sri Lanka.</p>
+      <nav class="fis-landing__login-nav" aria-label="Login options">
+        <a class="fis-landing__link-bar" href="student-login.html">Login … Previous Student Information System.</a>
+        <div class="fis-landing__link-bar fis-landing__link-bar--spacer" role="presentation"></div>
+        <a class="fis-landing__link-bar" href="student-login.html"
+          >Login … New Student Information System — please use from Academic Year 2015/2016 Second Semester onward.</a
+        >
+        <a class="fis-landing__link-bar" href="student-login.html">Login … Student.</a>
+        <a class="fis-landing__link-bar" href="staff-login.html">Login … Staff.</a>
+      </nav>
+
+      <section class="fis-landing__help" id="help" tabindex="-1">
+        <h2 class="fis-landing__help-heading">Help</h2>
+        <p class="fis-landing__help-text">
+          For access issues, contact the Faculty Examination Branch or your department office. Students should use
+          <strong>Student</strong> login; academic and administrative staff should use <strong>Staff</strong> login.
+        </p>
+      </section>
+
+      <footer class="fis-landing__footer">
+        <p>
+          Copyright © 2003 University of Kelaniya. All rights reserved.
+          <a href="#">Legal notice</a>
+        </p>
       </footer>
     </div>
-    <script src="js/auth.js"></script>
+
     <script>
       (function () {
-        if (window.PortalAuth && window.PortalAuth.isLoggedIn()) {
-          window.location.replace("dashboard.html");
+        var key = "fis_visit_count";
+        var n = 0;
+        try {
+          n = parseInt(localStorage.getItem(key) || "0", 10) || 0;
+          n += 1;
+          localStorage.setItem(key, String(n));
+        } catch (e) {
+          n = 1;
         }
-        var form = document.getElementById("login-form");
-        form.addEventListener("submit", function (e) {
-          e.preventDefault();
-          var u = document.getElementById("username").value.trim();
-          var p = document.getElementById("password").value;
-          if (!u || !p) return;
-          PortalAuth.login();
-          window.location.href = "dashboard.html";
-        });
+        var el = document.getElementById("fis-visit-count");
+        if (el) el.textContent = String(n);
       })();
     </script>
   </body>
