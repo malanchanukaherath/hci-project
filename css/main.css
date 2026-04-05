@@ -2,6 +2,7 @@
   University of Kelaniya — application styles */
 
 :root {
+  color-scheme: light;
   --color-primary: #0d47a1;
   --color-primary-dark: #082a5c;
   --color-primary-light: #1565c0;
@@ -15,14 +16,85 @@
   --color-success: #2e7d32;
   --color-warning: #ed6c02;
   --shadow-sm: 0 1px 3px rgba(13, 71, 161, 0.08);
-  --shadow-md: 0 4px 12px rgba(13, 71, 161, 0.1);
+  --shadow-md: 0 4px 12px rgba(13, 71, 161, 0.12);
   --radius: 12px;
   --radius-sm: 8px;
   --font-sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --focus-ring: 0 0 0 3px rgba(25, 118, 210, 0.45);
-  --glass-bg: rgba(255, 255, 255, 0.72);
-  --glass-bg-strong: rgba(255, 255, 255, 0.84);
-  --glass-border: rgba(255, 255, 255, 0.46);
+  /* Liquid surfaces (no backdrop blur) */
+  --liquid-base: #eef4fa;
+  --liquid-base-strong: #ffffff;
+  --liquid-highlight-a: rgba(25, 118, 210, 0.18);
+  --liquid-highlight-b: rgba(100, 181, 246, 0.14);
+  --liquid-border: rgba(21, 101, 192, 0.22);
+  --liquid-shine: rgba(255, 255, 255, 0.45);
+  --body-overlay: rgba(219, 230, 239, 0.5);
+  --body-overlay-2: rgba(219, 230, 239, 0.62);
+  --table-wrap-bg: #e8f0f8;
+  --table-row-alt: #f0f6fc;
+  --table-row-hover: #dbeaf8;
+  --login-crest-base: #f2f7fd;
+  --header-gradient: linear-gradient(128deg, #051a40 0%, #0d47a1 42%, #1565c0 88%);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --color-primary: #5c9ce6;
+  --color-primary-dark: #90caf9;
+  --color-primary-light: #7eb8f0;
+  --color-accent: #64b5f6;
+  --color-surface: #1c2433;
+  --color-bg: #121820;
+  --color-bg-muted: #243044;
+  --color-border: #3d4f66;
+  --color-text: #e8eef4;
+  --color-text-muted: #9fb0c3;
+  --color-success: #66bb6a;
+  --color-warning: #ffb74d;
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.35);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.45);
+  --focus-ring: 0 0 0 3px rgba(100, 181, 246, 0.5);
+  --liquid-base: #1c2636;
+  --liquid-base-strong: #243044;
+  --liquid-highlight-a: rgba(100, 181, 246, 0.16);
+  --liquid-highlight-b: rgba(66, 165, 245, 0.1);
+  --liquid-border: rgba(100, 181, 246, 0.22);
+  --liquid-shine: rgba(255, 255, 255, 0.06);
+  --body-overlay: rgba(10, 14, 22, 0.82);
+  --body-overlay-2: rgba(10, 14, 22, 0.9);
+  --table-wrap-bg: #1a2433;
+  --table-row-alt: #222e42;
+  --table-row-hover: #243a58;
+  --login-crest-base: #252f42;
+  --header-gradient: linear-gradient(128deg, #030d1f 0%, #0a1f42 48%, #143560 100%);
+}
+
+@keyframes liquid-surface-flow {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  28% {
+    transform: translate(5%, -4%) scale(1.05);
+  }
+  55% {
+    transform: translate(-4%, 5%) scale(1.02);
+  }
+  78% {
+    transform: translate(-5%, -3%) scale(1.04);
+  }
+}
+
+@keyframes liquid-header-flow {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate(6%, -5%) scale(1.08);
+    opacity: 1;
+  }
 }
 
 *,
@@ -45,12 +117,16 @@ body {
   color: var(--color-text);
   background-color: #dbe6ef;
   background-image:
-    linear-gradient(rgba(219, 230, 239, 0.55), rgba(219, 230, 239, 0.65)),
+    linear-gradient(var(--body-overlay), var(--body-overlay-2)),
     url("../bg%20photos/fos_image.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: fixed;
+}
+
+[data-theme="dark"] body {
+  background-color: #0a0e14;
 }
 
 /* Skip link */
@@ -106,7 +182,11 @@ a {
 }
 
 a:hover {
-  color: var(--color-primary-dark);
+  color: var(--color-primary);
+}
+
+[data-theme="dark"] a:hover {
+  color: var(--color-primary-light);
 }
 
 /* Layout utilities */
@@ -173,6 +253,14 @@ a:hover {
   background: rgba(13, 71, 161, 0.08);
 }
 
+[data-theme="dark"] .btn--ghost {
+  color: var(--color-primary-light);
+}
+
+[data-theme="dark"] .btn--ghost:hover {
+  background: rgba(100, 181, 246, 0.12);
+}
+
 .btn--block {
   width: 100%;
 }
@@ -184,14 +272,107 @@ a:hover {
   align-items: center;
 }
 
+/* Theme toggle (icons only: moon = go dark, sun = go light) */
+.theme-toggle-wrap {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 50;
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border-radius: 50%;
+  border: 2px solid var(--liquid-border);
+  background: var(--liquid-base-strong);
+  color: var(--color-primary);
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+
+.theme-toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.theme-toggle:hover {
+  background: var(--liquid-base);
+  border-color: var(--color-primary-light);
+  transform: scale(1.05);
+}
+
+.theme-toggle__icon {
+  width: 1.35rem;
+  height: 1.35rem;
+  flex-shrink: 0;
+}
+
+html[data-theme="light"] .theme-toggle__icon--sun {
+  display: none;
+}
+
+html[data-theme="dark"] .theme-toggle__icon--moon {
+  display: none;
+}
+
+.app-header .theme-toggle {
+  position: static;
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+  box-shadow: none;
+}
+
+.app-header .theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.26);
+  border-color: #fff;
+}
+
+/* Shared liquid layer (isolation keeps negative z-index ::before under content, including text nodes) */
+.card::before,
+.action-tile::before,
+.table-wrap::before {
+  content: "";
+  position: absolute;
+  inset: -48%;
+  background-color: var(--liquid-base);
+  background-image:
+    radial-gradient(ellipse 46% 40% at 32% 30%, var(--liquid-highlight-a), transparent 55%),
+    radial-gradient(ellipse 42% 48% at 76% 70%, var(--liquid-highlight-b), transparent 52%),
+    radial-gradient(ellipse 30% 28% at 55% 48%, var(--liquid-shine), transparent 65%);
+  animation: liquid-surface-flow 17s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.action-tile::before {
+  animation-duration: 19s;
+  animation-delay: -7s;
+}
+
+.table-wrap::before {
+  animation-duration: 21s;
+  animation-delay: -4s;
+  background-color: var(--table-wrap-bg);
+}
+
 /* Cards */
 .card {
-  background: var(--glass-bg);
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  overflow: hidden;
+  background: transparent;
   border-radius: var(--radius);
-  border: 1px solid var(--glass-border);
+  border: 1px solid var(--liquid-border);
   box-shadow: var(--shadow-md);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
   padding: 1.25rem 1.5rem;
 }
 
@@ -244,7 +425,7 @@ a:hover {
   font-size: 1rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  background: var(--glass-bg-strong);
+  background: var(--liquid-base-strong);
   color: var(--color-text);
 }
 
@@ -283,44 +464,66 @@ a:hover {
 }
 
 .login-brand__crest {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  overflow: hidden;
   width: 72px;
   height: 72px;
   margin: 0 auto 1rem;
   padding: 0.4rem;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid var(--glass-border);
+  background: transparent;
+  border: 1px solid var(--liquid-border);
   border-radius: 50%;
   display: grid;
   place-items: center;
   box-shadow: var(--shadow-md);
 }
 
+.login-brand__crest::before {
+  content: "";
+  position: absolute;
+  inset: -35%;
+  background-color: var(--login-crest-base);
+  background-image:
+    radial-gradient(circle at 35% 30%, var(--liquid-highlight-a), transparent 58%),
+    radial-gradient(circle at 70% 65%, var(--liquid-highlight-b), transparent 55%);
+  animation: liquid-surface-flow 14s ease-in-out infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
 .login-brand__crest img {
+  position: relative;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
+/* Login brand sits on the photo — use light text so it reads on blue/sky areas */
 .login-brand__uni {
   font-size: 0.8125rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.9);
   margin: 0 0 0.25rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .login-brand__faculty {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--color-primary-dark);
+  color: #ffffff;
   margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.45);
 }
 
 .login-brand__portal {
   font-size: 0.9375rem;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.88);
   margin: 0.5rem 0 0;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .login-card {
@@ -344,18 +547,64 @@ a:hover {
   margin-top: 2rem;
   text-align: center;
   font-size: 0.8125rem;
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.85);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.login-page .theme-toggle {
+  border-color: rgba(255, 255, 255, 0.55);
+  color: #fff;
+  background: linear-gradient(145deg, rgba(13, 71, 161, 0.55), rgba(8, 42, 92, 0.75));
+  box-shadow: 0 4px 16px rgba(8, 42, 92, 0.35);
+}
+
+.login-page .theme-toggle:hover {
+  background: linear-gradient(145deg, rgba(21, 101, 192, 0.65), rgba(8, 42, 92, 0.85));
+  border-color: rgba(255, 255, 255, 0.85);
 }
 
 /* App header */
 .app-header {
-  background: rgba(8, 42, 92, 0.62);
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  background: var(--header-gradient);
   color: #fff;
   padding: 1rem 0;
   box-shadow: var(--shadow-md);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.app-header::before {
+  content: "";
+  position: absolute;
+  inset: -35% -25%;
+  background:
+    radial-gradient(ellipse 55% 70% at 18% 25%, rgba(100, 181, 246, 0.45), transparent 58%),
+    radial-gradient(ellipse 50% 60% at 88% 78%, rgba(25, 118, 210, 0.4), transparent 55%);
+  animation: liquid-header-flow 22s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.app-header .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Global heading color must not override header (was dark text on blue bar) */
+.app-header h1,
+.app-header h2,
+.app-header h3 {
+  color: #fff;
+}
+
+.app-header a:not(.btn) {
+  color: #e3f2fd;
+}
+
+.app-header a:not(.btn):hover {
+  color: #fff;
 }
 
 .app-header__inner {
@@ -444,20 +693,22 @@ a:hover {
 }
 
 .action-tile {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 1.125rem 1.25rem;
-  background: var(--glass-bg);
-  border: 1px solid var(--glass-border);
+  background: transparent;
+  border: 1px solid var(--liquid-border);
   border-radius: var(--radius);
   text-decoration: none;
   color: var(--color-text);
   font-weight: 600;
   font-size: 0.9375rem;
   box-shadow: var(--shadow-sm);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
   min-height: 88px;
 }
@@ -573,12 +824,13 @@ a:hover {
 }
 
 .table-wrap {
+  position: relative;
+  z-index: 0;
+  isolation: isolate;
   overflow: auto;
   border-radius: var(--radius);
-  border: 1px solid var(--glass-border);
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--liquid-border);
+  background: transparent;
   max-height: min(70vh, 560px);
 }
 
@@ -610,11 +862,11 @@ a:hover {
 }
 
 .results-table tbody tr:nth-child(even) {
-  background: #f7fafc;
+  background: var(--table-row-alt);
 }
 
 .results-table tbody tr:hover {
-  background: #e3f2fd;
+  background: var(--table-row-hover);
 }
 
 .results-table .grade {
@@ -731,7 +983,9 @@ a:hover {
   .app-header,
   .screen-only,
   .page-title-bar .btn-group,
-  .login-page .login-footer {
+  .login-page .login-footer,
+  .theme-toggle-wrap,
+  .theme-toggle {
     display: none !important;
   }
 
@@ -771,15 +1025,14 @@ a:hover {
   .card {
     box-shadow: none;
     border: 1px solid #ccc;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
   }
 
-  .action-tile,
-  .table-wrap,
-  .app-header {
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
+  .card::before,
+  .action-tile::before,
+  .table-wrap::before,
+  .app-header::before,
+  .login-brand__crest::before {
+    animation: none !important;
   }
 }
 
@@ -796,5 +1049,13 @@ a:hover {
   *::before,
   *::after {
     transition-duration: 0.01ms !important;
+  }
+
+  .card::before,
+  .action-tile::before,
+  .table-wrap::before,
+  .app-header::before,
+  .login-brand__crest::before {
+    animation: none !important;
   }
 }
