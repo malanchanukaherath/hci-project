@@ -1348,16 +1348,8 @@ body.fis-landing-body {
   pointer-events: none;
 }
 
-.fis-landing__link-bar:nth-child(3)::before {
-  animation-delay: -5s;
-}
-
-.fis-landing__link-bar:nth-child(4)::before {
-  animation-delay: -9s;
-}
-
-.fis-landing__link-bar:nth-child(5)::before {
-  animation-delay: -2s;
+.fis-landing__link-bar:nth-child(2)::before {
+  animation-delay: -6s;
 }
 
 .fis-landing__link-bar:hover {
@@ -1387,24 +1379,6 @@ body.fis-landing-body {
 [data-theme="dark"] .fis-landing__link-bar:hover {
   color: #fff;
   border-color: rgba(100, 181, 246, 0.45);
-}
-
-.fis-landing__link-bar--spacer {
-  min-height: 0.5rem;
-  padding: 0.35rem;
-  pointer-events: none;
-  cursor: default;
-  box-shadow: none;
-}
-
-.fis-landing__link-bar--spacer::before {
-  background-color: #aecfe8;
-  background-image: none;
-  animation: none;
-}
-
-[data-theme="dark"] .fis-landing__link-bar--spacer::before {
-  background-color: #243044;
 }
 
 .fis-landing__help {
