@@ -6,13 +6,14 @@
   --color-primary: #0d47a1;
   --color-primary-dark: #061d42;
   --color-primary-light: #1565c0;
-  --color-accent: #0b5cad;
+  --color-accent: #003d7a;
   --color-surface: #f2f5f9;
   --color-bg: #e4ebf3;
   --color-bg-muted: #d8e2ed;
   --color-border: #a8b8cc;
-  --color-text: #121c2b;
-  --color-text-muted: #3d4d5f;
+  /* Near-black body copy on light/pale surfaces */
+  --color-text: #0a0a0a;
+  --color-text-muted: #242424;
   --color-success: #2e7d32;
   --color-warning: #ed6c02;
   --shadow-sm: 0 1px 2px rgba(15, 35, 60, 0.06), 0 2px 6px rgba(13, 71, 161, 0.06);
@@ -207,6 +208,49 @@ a:hover {
 
 [data-theme="dark"] a:hover {
   color: var(--color-primary-light);
+}
+
+/* Light mode: strong contrast on pale cards / tables (dark mode unchanged) */
+html[data-theme="light"] .btn--secondary {
+  color: #0a0a0a;
+}
+
+html[data-theme="light"] .btn--ghost {
+  color: #0a0a0a;
+  border-color: rgba(0, 0, 0, 0.22);
+}
+
+html[data-theme="light"] .btn--ghost:hover {
+  background: rgba(0, 0, 0, 0.07);
+  color: #000000;
+}
+
+html[data-theme="light"] .form-group label {
+  color: #0a0a0a;
+}
+
+html[data-theme="light"] .card__title {
+  color: #1a1a1a;
+}
+
+html[data-theme="light"] .card__meta {
+  color: #242424;
+}
+
+html[data-theme="light"] .detail-list dt {
+  color: #1f1f1f;
+}
+
+html[data-theme="light"] .detail-list dd {
+  color: #0a0a0a;
+}
+
+html[data-theme="light"] .results-table td {
+  color: #0a0a0a;
+}
+
+html[data-theme="light"] .page-main .subtitle {
+  color: #242424 !important;
 }
 
 /* Layout utilities */
@@ -417,7 +461,7 @@ html[data-theme="dark"] .theme-toggle__icon--moon {
 }
 
 html[data-theme="light"] .card__value {
-  color: #051a33;
+  color: #000000;
 }
 
 .card__meta {
@@ -459,7 +503,7 @@ html[data-theme="light"] .form-group input[type="password"],
 html[data-theme="light"] .form-group input[type="search"],
 html[data-theme="light"] .form-group select {
   background: #f7f9fc;
-  color: #0f1720;
+  color: #000000;
 }
 
 .form-group input:focus-visible,
@@ -485,7 +529,8 @@ html[data-theme="light"] .form-group select {
 }
 
 html[data-theme="light"] .form-footer-links a {
-  color: #0a4f9c;
+  color: #00264d;
+  font-weight: 700;
 }
 
 /* Login page */
@@ -587,7 +632,7 @@ html[data-theme="light"] .form-footer-links a {
 }
 
 html[data-theme="light"] .login-card .subtitle {
-  color: #354556;
+  color: #1a1a1a;
 }
 
 .login-footer {
@@ -767,7 +812,7 @@ html[data-theme="light"] .login-card .subtitle {
 }
 
 html[data-theme="light"] .action-tile:hover {
-  color: #051a33;
+  color: #000000;
 }
 
 .action-tile:focus-visible {
@@ -784,7 +829,7 @@ html[data-theme="light"] .action-tile:hover {
 }
 
 html[data-theme="light"] .action-tile small {
-  color: #354556;
+  color: #1a1a1a;
 }
 
 .dashboard-two-col {
@@ -934,7 +979,7 @@ html[data-theme="light"] .action-tile small {
 }
 
 html[data-theme="light"] .results-table .grade {
-  color: #051a33;
+  color: #000000;
 }
 
 .empty-row td {
@@ -945,7 +990,7 @@ html[data-theme="light"] .results-table .grade {
 }
 
 html[data-theme="light"] .empty-row td {
-  color: #354556;
+  color: #1a1a1a;
 }
 
 /* Admission page */
@@ -1132,12 +1177,12 @@ html[data-theme="light"] .empty-row td {
 /* ——— Faculty Information System landing (legacy-style) ——— */
 body.fis-landing-body {
   --fis-page-bg: #b4c4d6;
-  --fis-text: #121c2b;
-  --fis-masthead-muted: #4a5d70;
+  --fis-text: #0a0a0a;
+  --fis-masthead-muted: #2a2a2a;
   --fis-help-bg: #e8eef6;
   --fis-help-border: rgba(18, 55, 95, 0.16);
-  --fis-footer-text: #3d4d5f;
-  --fis-link-bar-text: #06162e;
+  --fis-footer-text: #1f1f1f;
+  --fis-link-bar-text: #000000;
   --fis-title-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 0 0 1px rgba(18, 55, 95, 0.08);
   color: var(--fis-text);
 }
@@ -1213,7 +1258,7 @@ body.fis-landing-body:not(.page-bg--photo) {
 }
 
 .fis-landing__utility a {
-  color: #004272;
+  color: #000000;
   font-weight: 700;
   text-underline-offset: 3px;
 }
@@ -1247,7 +1292,7 @@ body.fis-landing-body:not(.page-bg--photo) {
   font-size: clamp(0.95rem, 2.5vw, 1.125rem);
   font-weight: 700;
   font-style: italic;
-  color: #002747;
+  color: #000000;
   text-align: center;
   letter-spacing: 0.02em;
 }
@@ -1311,7 +1356,7 @@ body.fis-landing-body:not(.page-bg--photo) {
   font-size: 1rem;
   font-weight: 700;
   font-style: italic;
-  color: #003966;
+  color: #000000;
   text-align: center;
 }
 
@@ -1369,7 +1414,7 @@ body.fis-landing-body:not(.page-bg--photo) {
 }
 
 .fis-landing__link-bar:hover {
-  color: #002747;
+  color: #000000;
   border-color: rgba(0, 89, 150, 0.4);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), 0 2px 10px rgba(0, 60, 120, 0.14);
 }
@@ -1415,7 +1460,7 @@ body.fis-landing-body:not(.page-bg--photo) {
 .fis-landing__help-heading {
   margin: 0 0 0.5rem;
   font-size: 1rem;
-  color: #002747;
+  color: #000000;
 }
 
 [data-theme="dark"] .fis-landing__help-heading {
@@ -1447,7 +1492,7 @@ body.fis-landing-body:not(.page-bg--photo) {
 }
 
 .fis-landing__footer a {
-  color: #004272;
+  color: #000000;
   font-weight: 700;
 }
 
