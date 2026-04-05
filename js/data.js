@@ -1,5 +1,5 @@
 /**
- * Mock student data for prototype — Faculty of Science, University of Kelaniya
+ * Student data for Faculty of Science, University of Kelaniya
  */
 window.PORTAL_DATA = {
   student: {

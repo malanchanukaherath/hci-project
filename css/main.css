@@ -1,5 +1,5 @@
 /* Faculty of Science — Student Results Portal
-   University of Kelaniya — prototype styles */
+  University of Kelaniya — application styles */
 
 :root {
   --color-primary: #0d47a1;
@@ -20,6 +20,9 @@
   --radius-sm: 8px;
   --font-sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   --focus-ring: 0 0 0 3px rgba(25, 118, 210, 0.45);
+  --glass-bg: rgba(255, 255, 255, 0.72);
+  --glass-bg-strong: rgba(255, 255, 255, 0.84);
+  --glass-border: rgba(255, 255, 255, 0.46);
 }
 
 *,
@@ -40,7 +43,14 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   color: var(--color-text);
-  background: var(--color-bg);
+  background-color: #dbe6ef;
+  background-image:
+    linear-gradient(rgba(219, 230, 239, 0.55), rgba(219, 230, 239, 0.65)),
+    url("../bg%20photos/fos_image.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 /* Skip link */
@@ -176,10 +186,12 @@ a:hover {
 
 /* Cards */
 .card {
-  background: var(--color-surface);
+  background: var(--glass-bg);
   border-radius: var(--radius);
-  border: 1px solid var(--color-border);
-  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: 1.25rem 1.5rem;
 }
 
@@ -232,7 +244,7 @@ a:hover {
   font-size: 1rem;
   border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
-  background: var(--color-surface);
+  background: var(--glass-bg-strong);
   color: var(--color-text);
 }
 
@@ -261,7 +273,7 @@ a:hover {
   align-items: center;
   justify-content: center;
   padding: 2rem 1rem;
-  background: linear-gradient(160deg, var(--color-bg) 0%, #dde7f0 50%, var(--color-bg) 100%);
+  background: transparent;
 }
 
 .login-brand {
@@ -274,15 +286,19 @@ a:hover {
   width: 72px;
   height: 72px;
   margin: 0 auto 1rem;
-  background: var(--color-primary);
-  color: #fff;
+  padding: 0.4rem;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid var(--glass-border);
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.75rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
+  display: grid;
+  place-items: center;
+  box-shadow: var(--shadow-md);
+}
+
+.login-brand__crest img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .login-brand__uni {
@@ -333,10 +349,13 @@ a:hover {
 
 /* App header */
 .app-header {
-  background: var(--color-primary-dark);
+  background: rgba(8, 42, 92, 0.62);
   color: #fff;
   padding: 1rem 0;
   box-shadow: var(--shadow-md);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .app-header__inner {
@@ -345,6 +364,22 @@ a:hover {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+
+.app-header__brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.app-header__logo {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 0.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.55);
 }
 
 .app-header__title {
@@ -413,14 +448,16 @@ a:hover {
   flex-direction: column;
   align-items: flex-start;
   padding: 1.125rem 1.25rem;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   border-radius: var(--radius);
   text-decoration: none;
   color: var(--color-text);
   font-weight: 600;
   font-size: 0.9375rem;
   box-shadow: var(--shadow-sm);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
   min-height: 88px;
 }
@@ -538,8 +575,10 @@ a:hover {
 .table-wrap {
   overflow: auto;
   border-radius: var(--radius);
-  border: 1px solid var(--color-border);
-  background: var(--color-surface);
+  border: 1px solid var(--glass-border);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   max-height: min(70vh, 560px);
 }
 
@@ -637,6 +676,14 @@ a:hover {
   margin: 0.75rem 0 0;
 }
 
+.print-admission__logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  display: block;
+  margin: 0.5rem auto;
+}
+
 .print-admission__body {
   display: grid;
   gap: 0.75rem;
@@ -677,6 +724,7 @@ a:hover {
 @media print {
   body {
     background: #fff;
+    background-image: none !important;
   }
 
   .skip-link,
@@ -723,6 +771,22 @@ a:hover {
   .card {
     box-shadow: none;
     border: 1px solid #ccc;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .action-tile,
+  .table-wrap,
+  .app-header {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+}
+
+@media (max-width: 700px) {
+  .app-header__logo {
+    width: 38px;
+    height: 38px;
   }
 }
 
