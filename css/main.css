@@ -122,6 +122,12 @@ body {
   font-size: 1rem;
   line-height: 1.5;
   color: var(--color-text);
+  background-color: var(--color-bg);
+  background-image: none;
+}
+
+/* Campus photo: only index (landing), student-login, staff-dashboard */
+body.page-bg--photo {
   background-color: #b9c9dc;
   background-image:
     linear-gradient(var(--body-overlay), var(--body-overlay-2)),
@@ -133,7 +139,14 @@ body {
 }
 
 [data-theme="dark"] body {
+  background-color: var(--color-bg);
+}
+
+[data-theme="dark"] body.page-bg--photo {
   background-color: #0a0e14;
+  background-image:
+    linear-gradient(var(--body-overlay), var(--body-overlay-2)),
+    url("../bg%20photos/fos_image.jpg");
 }
 
 /* Skip link */
@@ -1126,9 +1139,12 @@ body.fis-landing-body {
   --fis-footer-text: #3d4d5f;
   --fis-link-bar-text: #06162e;
   --fis-title-bar-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55), 0 0 0 1px rgba(18, 55, 95, 0.08);
-  background-image: none;
-  background-color: var(--fis-page-bg);
   color: var(--fis-text);
+}
+
+/* Solid page tint when landing has no photo (should not apply with .page-bg--photo) */
+body.fis-landing-body:not(.page-bg--photo) {
+  background-color: var(--fis-page-bg);
 }
 
 [data-theme="dark"] body.fis-landing-body {
