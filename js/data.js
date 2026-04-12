@@ -4,8 +4,8 @@
 window.PORTAL_DATA = {
   student: {
     name: "K. D. Perera",
-    id: "2021/FS/C/0456",
-    programme: "B.Sc. (Hons) in Computer Science",
+    id: "IM/2022/64",
+    programme: "B.Sc. (Hons) in IT",
     registrationYear: "2021/2022",
     academicYear: "2024/2025",
     examStatus: "Eligible for semester examinations",
@@ -165,7 +165,7 @@ window.PORTAL_DATA = {
   },
   admission: {
     examPeriod: "Second Semester Examinations — 2024/2025",
-    centreName: "Faculty of Science Examination Hall — Block B",
+    centreName: "A8 203",
     centreAddress: "University of Kelaniya, Dalugama, Kelaniya 11600",
     validFrom: "15 April 2026",
     validTo: "30 April 2026",
